@@ -29,7 +29,7 @@ void bubble_sort(int * a, int n)
     int i,j; //用于循环计数
     int change; //y用于判断第二个循环中是否存在元素互换过程
     int k; //用于元素互换
-    for(i = n-1 , change = 1 ; i>1 && change ; i--)
+    for(i = n-1 , change = 1 ; i>=1 && change ; i--)
     {
         change = 0;
         for (j=0 ; j<n-1 ; j++)
