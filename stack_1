@@ -1,0 +1,122 @@
+/*
+时间：2018/6/25 13点07分
+作者：楼浩然
+功能：利用链表实现栈
+1.初始化一个栈
+2.判断栈空、栈满
+3.入栈操作和出栈操作
+4.打印栈顶元素
+5.清空栈
+6.销毁栈
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+struct Node{
+    int Element ; //int可以换成其他数据类型
+    struct Node * next;
+};
+
+typedef struct Node * PtrToNode;
+
+typedef PtrToNode Stack;
+
+bool IsEmpty(Stack s);
+Stack CreateStack(void);
+void DisposeStack(Stack s);
+void MakeEmpty(Stack s);
+void Push(int x,Stack s);
+int top(Stack s);
+void Pop(Stack s);
+
+int main(void)
+{
+    printf("----------栈初始化--------------\n\n");
+    Stack s;
+    s = CreateStack();
+    printf("----------栈是否为空------------\n\n");
+    if(IsEmpty(s))
+        printf("栈空\n");
+    else
+        printf("栈不为空\n");
+    printf("----------入栈并打印栈顶元素---------------\n\n");
+    int i;
+    for(i=0 ; i<10 ; i++)
+    {
+        Push(i,s);
+        printf("第%d个元素是：%d\n",i,top(s));
+    }
+
+    printf("----------出栈-------------\n\n");
+    while(!IsEmpty(s))
+        Pop(s);
+    printf("----------销毁栈----------\n\n");
+    Push(10,s);
+    MakeEmpty(s);
+    if(IsEmpty(s))
+        printf("栈已清空！\n");
+    return 0;
+}
+
+bool IsEmpty(Stack s)
+{
+    if(s->next==NULL)
+        return true;
+    else
+        return false;
+}
+void Pop(Stack s)
+{
+    PtrToNode Firstcell;
+    if(IsEmpty(s))
+        printf("Empty stack\n");
+    else
+    {
+        Firstcell = s->next;
+        s->next = s->next->next;
+    }
+    free(Firstcell);
+}
+void MakeEmpty(Stack s)
+{
+    if(s == NULL)
+        printf("Must use the CreateStack first\n");
+    else
+        while(!IsEmpty(s))
+            Pop(s);
+}
+
+Stack CreateStack(void) //创建栈
+{
+    Stack s;
+    s = malloc(sizeof(struct Node));
+    if(s == NULL)
+        printf("Out of space!\n");
+    s->next = NULL;
+    MakeEmpty(s);
+    return s;
+}
+
+void Push(int x, Stack s)
+{
+    PtrToNode temp;
+    temp = malloc(sizeof(struct Node));
+    if(temp == NULL)
+        printf("Out of space");
+    else
+    {
+        temp->Element = x;
+        temp->next = s->next ;
+        s->next = temp;
+    }
+}
+
+int top(Stack s)
+{
+    if(!IsEmpty(s))
+        return s->next->Element;
+    printf("Empty stack");
+    return 0;
+}
