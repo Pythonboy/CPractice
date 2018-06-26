@@ -1,0 +1,117 @@
+/*
+时间：2018/6/25 16点57分
+作者：楼浩然
+功能：利用数组实现栈
+1.初始化一个栈
+2.判断栈空、栈满
+3.入栈操作和出栈操作
+4.打印栈顶元素
+5.销毁栈
+*/
+
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 10
+
+struct Node{
+    int data[SIZE];
+    int top;
+};
+typedef struct Node stack;
+
+//对栈初始化
+void init(stack * s )
+{
+    s->top = -1;
+}
+
+//判断栈是否为空
+bool IsEmpty(stack * s)
+{
+    if(s->top == -1)
+    {
+        return true;
+    }
+    else
+        return false;
+}
+
+//判断栈是否为满
+bool IsFull(stack * s)
+{
+    if(s->top == SIZE-1)
+        return true;
+    else
+        return false;
+}
+
+//入栈操作
+void Push(stack * s,int i)
+{
+    if(!IsFull(s))
+        s->data[++s->top] = i;
+    else
+        printf("栈满");
+}
+
+//去除栈顶元素
+int Top(stack * s)
+{
+    if(!IsEmpty(s))
+        return s->data[s->top];
+    else
+        printf("栈空");
+}
+
+//出栈
+void Pop(stack * s)
+{
+    if(!IsEmpty(s))
+        s->top--;
+    else
+        printf("栈空");
+}
+
+//销毁栈
+void Destroy(stack * s)
+{
+    s->top = -1;
+}
+
+int main(void)
+{
+    printf("---------检测栈的使用----------\n\n");
+    stack * s = malloc(sizeof(stack));//定义一个栈
+    init(s);  //初始化一个栈，此时栈空
+    printf("---------检测栈是否为空--------\n\n");
+    if(IsEmpty(s))
+        printf("栈空！\n");
+    else
+        printf("栈不空\n");
+    printf("---------入栈操作并取出顶部元素-------------\n\n");
+    int i;
+    for(i=0 ; i<SIZE ; i++)
+    {
+        Push(s,i);
+        printf("第%d个元素是：%d\n",i,Top(s));
+    }
+    printf("---------检查栈是否已满----------------------\n\n");
+     if(IsFull(s))
+        printf("栈满！\n");
+    else
+        printf("栈未满\n");
+    printf("---------出栈操作------------------------\n\n");
+    while(IsEmpty(s))
+        Pop(s);
+    printf("---------销毁栈-------------------\n\n");
+    Push(s,10);
+    Destroy(s);
+    if(IsEmpty(s))
+        printf("销毁成功！\n");
+    else
+        printf("销毁失败！\n");
+    return 0;
+
+}
