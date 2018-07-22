@@ -1,0 +1,62 @@
+1.基本操作函数
+
+begin() 返回指向第一个元素的迭代器 
+clear() 删除所有元素 
+count() 返回一个元素出现的次数 
+empty() 如果multimap为空则返回真 
+end() 返回一个指向multimap末尾的迭代器 
+equal_range() 返回指向元素的key为指定值的迭代器对 
+erase() 删除元素 
+find() 查找元素 
+get_allocator() 返回multimap的配置器 
+insert() 插入元素 
+key_comp() 返回比较key的函数 
+lower_bound() 返回键值>=给定元素的第一个位置 
+max_size() 返回可以容纳的最大元素个数 
+rbegin() 返回一个指向mulitmap尾部的逆向迭代器 
+rend() 返回一个指向multimap头部的逆向迭代器 
+size() 返回multimap中元素的个数 
+swap() 交换两个multimaps 
+upper_bound() 返回键值>给定元素的第一个位置 
+value_comp() 返回比较元素value的函数
+
+
+
+2.插入元素
+multimap<string,string>pets;
+auto iter = pets.insert(pair<string,string>("dog","Fang"));
+iter = pets.insert(iter,make_pair("dog","spot"));
+pets.insert(make_pair("dog","Rover"));
+pers.insert(make_pair("cat","Korke"));
+
+
+
+3.访问multimap中的元素
+（1）访问键的第一个元素
+auto iter = people.find(name);
+if(iter != people.end())
+  cout<<name<<"is"<<iter->second<<endl;
+  
+(2)访问键中的所有元素
+auto pr = people.equal_range("Ann");
+if(pr.first != people.end())
+{
+  for(auto iter = pr.first ; iter != pr.second ; iter++)
+    cout<<iter->first<<" is "<< iter->second <<endl;
+}
+
+(3)使用lower_bound()和upper_bound()
+auto iter1 = people.lower_bound("Ann");
+auto iter2 = people.upper_bound("Ann");
+if(iter1!=people.end())
+{
+  for(auto iter = iter1; iter != iter2 ; iter++)
+    cout<<iter->first<<" is "<<iter->second<<endl;
+}
+
+
+
+4.统计multimap中键的个数
+auto n = people.count("JACK")
+
+auto n = people.distance(people.lower_bound("JACK"),people.upper_bound("JACK"));
