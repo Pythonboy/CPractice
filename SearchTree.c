@@ -11,6 +11,7 @@
 7.将元素添加入二叉树中
 8.删除二叉树中的一个元素
 9.取出二叉树中某一个节点的元素值
+10.二叉树的前序遍历、中序遍历、后序遍历
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,6 +29,9 @@ Position FindMax(SearchTree T); //寻找树中的最大值
 SearchTree Insert(ElementType X,SearchTree T);//将元素插入树中
 SearchTree Delete(ElementType X,SearchTree T);//将树中的某一元素删除
 ElementType Retrieve(Position P); //取出P节点的元素
+void preOrderTraverse1(SearchTree T); //前序遍历
+void inOrderTraversel(SearchTree T);//中序遍历
+void postOrderTraversel(SearchTree T);//后序遍历
 
 struct TreeNode{
     ElementType Element;
@@ -54,7 +58,13 @@ int main(void)
         scanf("%d",&Y);
         T = Insert(Y,T);
     }
-
+    printf("前序遍历：\n");
+    preOrderTraverse1(T);
+    printf("\n中序遍历：\n");
+    inOrderTraversel(T);
+    printf("\n后序遍历:\n");
+    postOrderTraversel(T);
+    printf("\n");
     Position P;
     P = FindMin(T);
     printf("二叉查找树中的最小值是%d\n",Retrieve(P));
@@ -209,3 +219,32 @@ ElementType Retrieve(Position P)
 {
     return P->Element;
 }
+
+
+void preOrderTraverse1(SearchTree T)
+{
+    if(T==NULL)
+        return;
+    printf("%d ",T->Element);
+    preOrderTraverse1(T->Left);
+    preOrderTraverse1(T->Right);
+}
+
+void inOrderTraversel(SearchTree T)
+{
+    if(T==NULL)
+        return;
+    inOrderTraversel(T->Left);
+    printf("%d ",T->Element);
+    inOrderTraversel(T->Right);
+}
+
+void postOrderTraversel(SearchTree T)
+{
+    if(T==NULL)
+        return;
+    postOrderTraversel(T->Left);
+    postOrderTraversel(T->Right);
+    printf("%d ",T->Element);
+}
+
