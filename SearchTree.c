@@ -199,7 +199,7 @@ SearchTree Delete(ElementType X,SearchTree T)
         if(T->Left == NULL)
             T = T->Right;
         else if (T->Right == NULL)
-            T = T->Right;
+            T = T->Left;
         free(TemCell);
     }
     return T;
