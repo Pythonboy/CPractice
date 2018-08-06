@@ -11,6 +11,7 @@ vector<int>Book; //用于判断顶点是否已经遍历过
 
 void DFS(int st,int n) //非递归深度优先遍历
 {
+    Book[st] = 1;
     if(Book[st])
         cout<<st<<" ";
     int i;
@@ -18,7 +19,6 @@ void DFS(int st,int n) //非递归深度优先遍历
     {
         if(Graph[st][i]==1 && !Book[i])
         {
-            Book[i] = 1;
             DFS(i,n);
         }
     }
@@ -43,7 +43,6 @@ int main()
     printf("请输入起点坐标:\n");
     int st;
     cin>>st;
-    Book[st] = 1;
     DFS(st,N);
     return 0;
 }
