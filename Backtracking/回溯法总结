@@ -1,1 +1,15 @@
+回溯法说白了就是探索所有的可能性，并将正确的可能性记录在案，如果有需要的话在其中选择最优答案
 
+void backtracking(int i,int N,.....)
+{
+    if(i >=N / i>N)
+    {
+        if(条件）
+            记录答案；
+            如果有需要，进一步比较答案（此时需要两个全局变量，进行比较； path，temppath）
+        return； //表示递归到此就结束了，该往上返回了
+    }
+    path.push_back(i);
+    backtracking(....)
+    path.pop_back();    //有进有出  ；有改变，就要有返回
+}
