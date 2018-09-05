@@ -42,3 +42,33 @@ int main()
     cout<<max<<endl;
         return 0;
 }
+
+
+int triangle[110][110],dp[110][110];
+int main()
+{
+    int N;
+    cin>>N;
+    memset(dp,0,sizeof(dp));
+    memset(triangle,0,sizeof(triangle));
+    for(int i=1;i<=N;i++)
+    {
+        for(int j=1;j<=i;j++)
+        {
+            cin>>triangle[i][j];
+        }
+    }
+    for(int i=1;i<=N;i++)
+    {
+        dp[N][i]=triangle[N][i];
+    }
+    for(int i=N-1;i>=1;i--)
+    {
+        for(int j=1;j<=i;j++)
+        {
+            dp[i][j]=max(dp[i+1][j]+triangle[i][j],dp[i+1][j+1]+triangle[i][j]);
+        }
+    }
+    cout<<dp[1][1]<<endl;
+        return 0;
+}
