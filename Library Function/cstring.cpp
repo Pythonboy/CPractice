@@ -51,7 +51,7 @@ char *strncmp(const char *p1, const char *p2, size_t n)
 
 char *strstr(const char *p1, const char *p2)
 功能：判断p2所指向的字符串是否是p1所指向的字符串的子串
-返回值：若是子串，返回开始位置的地址；否则返回0。
+返回值：若是子串，返回开始位置的地址；否则返回NULL。
 
 
 
